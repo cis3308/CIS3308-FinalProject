@@ -1,12 +1,5 @@
-
-// import { createClient } from '@supabase/supabase-js'
-// const supabase = createClient<Database>(
-//   import.meta.env.VITE_SUPABASE_URL,
-//   import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
-// )
 //-----------------------------------------------------//
 
-import  "../../database.types.ts"
 import {supabase} from "../supabaseClient.ts"
 
 //------------ Display information -------------------//
@@ -50,6 +43,12 @@ export  const showFriendsList = async() =>{
   return data;
 };
 
+export const showFriendID = async(friendFName: string, friendLName: string) =>{
+  const{data} = await supabase.from("userprofile").select("u_id").eq("first_name", friendFName)
+  .eq("last_name", friendLName);
+  return data;
+}
+
 export const showTotalBalance = async() =>{
   const{data} = await supabase.from('balance')
   .select('total_balance');
@@ -61,10 +60,15 @@ export const showTotalEventExpenses = async(event: number) =>{
   return data;
 };
 
-export const showTotalMonthlyExpense = async(start_date: string, end_date: string) =>{
+export const showMonthlyExpenses = async(start_date: string, end_date: string) =>{
   const{data} = await supabase.from('transactions')
   .select('*').gte("t_date", end_date).lte("t_date", start_date)
   //.is('f_id', null)
+  return data;
+};
+
+export const showMonthlyTotal = async(start_date: string, end_date: string) =>{
+  const{data} = await supabase.rpc('showmonthlytotal', {startdate: start_date, enddate: end_date})
   return data;
 };
 
@@ -80,39 +84,18 @@ export  const showTotalDebt = async() =>{
   return data;
 };
 
+
 //-----------------------------------------------------//
 
 //-------------- update information  ------------------//
 
-export  const updatePayment = async(payment: number) =>{
-  let userInput = payment;
-  const{data} = await supabase.from('transactions')
-  .select('amount')
-  .neq('f_id', null).single()
-  const updatedAmount = data.amount - userInput;
-
-  await supabase.from('transactions')
-  .update('amount', updatedAmount).neq('f_id', null).eq('f_id', 'u_id')
+export  const updatePayment = async(payment: number, transactionID: number, transactionOwner: string) =>{
+  await supabase.rpc('updatetransaction', {updateamount: payment, t_id: transactionID});
+  await supabase.rpc('updatebalance', {updateamount: payment, userid: transactionOwner});
 };
 
-
-
-
-
-
-
-
-export const updateBalance = async(amount: number) =>{
-  try{ 
-    let { data: balance } = await supabase
-  .rpc('updatebalance', {updateamount: amount}); 
-  if(balance){console.log(balance)}
-  return balance;
-  }
-  
-  catch(error){
-    console.error(error)
-  }
+export const updateBalance = async(amount: number, userID: string) =>{
+  await supabase.rpc('updatebalance', {updateamount: amount, userid: userID}); 
 };
 
 //-----------------------------------------------------//
@@ -157,4 +140,10 @@ export const createBalance = async(UserID: string,
   }
 };
 
+export const addFriend = async(userID: string, friendID: string) =>{
+  await supabase.from("friends_list").insert({u_id: userID, f_id: friendID});
+}
+
+//TODO create function to add expose logged user's first and last name 
+// (useful for search)
 //-----------------------------------------------------//

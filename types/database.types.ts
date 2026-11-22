@@ -231,9 +231,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      showmonthlytotal: {
+        Args: { enddate: string; startdate: string }
+        Returns: number
+      }
       showtotaldebt: { Args: never; Returns: number }
       sumeventexpenses: { Args: { eventid: number }; Returns: number }
-      updatebalance: { Args: { updateamount: number }; Returns: undefined }
+      updatebalance: {
+        Args: { updateamount: number; userid: string }
+        Returns: undefined
+      }
+      updatetransaction: {
+        Args: { t_id: number; updateamount: number }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

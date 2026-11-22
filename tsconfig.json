@@ -20,5 +20,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "database.types.ts","types"]
+  "include": ["src", "types/database.types.ts","types"]
 }
