@@ -31,6 +31,7 @@ export  const showAnnualBudget = async() =>{
   return data;
 };
 
+//maybe update
 export  const showRequests = async() =>{
   const{data} = await supabase.from('transactions')
   .select('*').neq('f_id', null);
@@ -62,7 +63,7 @@ export const showTotalEventExpenses = async(event: number) =>{
 
 export const showMonthlyExpenses = async(start_date: string, end_date: string) =>{
   const{data} = await supabase.from('transactions')
-  .select('*').gte("t_date", end_date).lte("t_date", start_date)
+  .select('*').lte("t_date", end_date).gte("t_date", start_date)
   //.is('f_id', null)
   return data;
 };
@@ -74,13 +75,23 @@ export const showMonthlyTotal = async(start_date: string, end_date: string) =>{
 
 export const filterByEvent = async(e_id: number) =>{
   const{data} = await supabase.from('transactions')
-  .select('*').eq("e_id", e_id).single();
+  .select('*').eq("e_id", e_id);
   return data;
 };
 
 
 export  const showTotalDebt = async() =>{
   const{data} = await supabase.rpc('showtotaldebt');
+  return data;
+};
+
+export  const showLender = async(t_id: number) =>{
+  const{data} = await supabase.rpc('showlender', {transactionid: t_id});
+  return data;
+};
+
+export  const showReceiver = async(t_id: number) =>{
+  const{data} = await supabase.rpc('showreceiver', {transactionid: t_id});
   return data;
 };
 

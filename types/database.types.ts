@@ -231,10 +231,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      showlender: { Args: { transactionid: number }; Returns: string }
       showmonthlytotal: {
         Args: { enddate: string; startdate: string }
         Returns: number
       }
+      showreceiver: { Args: { transactionid: number }; Returns: string }
       showtotaldebt: { Args: never; Returns: number }
       sumeventexpenses: { Args: { eventid: number }; Returns: number }
       updatebalance: {

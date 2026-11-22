@@ -28,6 +28,28 @@ as $$
     -- changed from text to date
 $$;
 
+create or replace function showLender(transactionID numeric)
+returns text
+language sql
+as $$
+     select first_name
+    from userprofile up 
+    join transactions tr
+    on tr.u_id = up.u_id
+    where tr.t_id = transactionID;
+$$;
+
+create or replace function showReceiver(transactionID numeric)
+returns text
+language sql
+as $$
+     select first_name
+    from userprofile up 
+    join transactions tr
+    on tr.f_id = up.u_id
+    where tr.t_id = transactionID;
+$$;
+
 -- Update 
 
 create or replace function updateBalance(updateAmount int, userID uuid)

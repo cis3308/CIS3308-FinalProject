@@ -67,18 +67,9 @@ Queries/Views SQL
     select sum(amount) from transactions
     where T_type = 'debt/request';
 
------- repay debt/ accept request
-    update table transactions t
-    set  amount = t.amount - 'userInput'
-    where T_type = 'debt/request' and
-    t.F_ID = t.U_ID and
-    T_ID = selected;
 
------- receivePayment
-    update table Balance 
-    set Balance.Total_balance + t.amount
-    from transactions 
-    where t.T_type = 'debt/request';
+
+
 
 ------ showRemainingAmountToPay
     create view showRemainingAmountToPay as
@@ -95,7 +86,7 @@ Queries/Views SQL
 
 
 Note: 
--populate JSON with T_type values 
+-populate seed with T_type values 
 
 
 References:
@@ -145,3 +136,20 @@ https://github.com/supabase/supabase-js/issues/2140
     (title, C_ID, amount, currency, E_ID, T_Date, T_Time, T_type)
     values('user_Input', 'user_Input', 'user_Input', 'user_Input'
     , 'dropdown','user_Input', 'user_Input', 'dropdown')
+
+    ------ receivePayment
+    update table Balance 
+    set Balance.Total_balance + t.amount
+    from transactions 
+    where t.T_type = 'debt/request';
+
+
+    ------ repay debt/ accept request
+    update table transactions t
+    set  amount = t.amount - 'userInput'
+    where T_type = 'debt/request' and
+    t.F_ID = t.U_ID and
+    T_ID = selected;
+
+
+   
