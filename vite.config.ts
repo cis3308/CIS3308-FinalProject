@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
 export default defineConfig({
+  build:{outDir:'docs'},
   base:'/CIS3308-FinalProject/'
 })
