@@ -112,7 +112,9 @@ main {
   text-align: center;
 }
 
-.monthly-budget h1 {
+.monthly-budget h1,
+.income h1,
+.expense h1 {
   margin: 0;
   font-size: 32px;
 }
@@ -158,15 +160,16 @@ main {
   padding: 0;
   list-style: none;
 }
+
 #transaction-list li {
   padding: 14px 0;
   border-bottom: 1px solid #eee;
+  white-space: pre-wrap;
+  tab-size: 80;
 }
 
-/* Income page */
+/* Income and expense pages */
 .income-page {
-  width: 86%;
-  max-width: 1120px;
   margin: 40px auto;
 }
 
@@ -177,55 +180,27 @@ main {
   gap: 32px;
 }
 
-.income h1 {
-  margin: 0;
-  font-size: 32px;
-}
-
 .monthly-budget-left {
   margin: 0;
   font-size: 32px;
 }
 
-/* Transaction list */
-.income-page .recent-transactions {
-  margin-top: 36px;
-}
-
-.income-page .recent-transactions h2 {
-  margin: 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #ccc;
-  font-size: 20px;
-}
-
-.income-page #transaction-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.income-page #transaction-list li {
-  padding: 14px 0;
-  border-bottom: 1px solid #eee;
-}
-#transaction-list li {
-  white-space: pre-wrap;
-  tab-size: 80;
-}
+/* Transaction toolbar */
 .transaction-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   padding-bottom: 12px;
   border-bottom: 1px solid #ccc;
 }
 
-.income-page .transaction-toolbar h2 {
-  margin: 0;
-  padding: 8px 470px;
+.transaction-toolbar h2 {
+  flex: 1;
+  padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  text-align: center;
 }
 
 .transaction-toolbar button {
@@ -235,8 +210,158 @@ main {
   background: #252525;
   color: white;
   cursor: pointer;
-  /*font-size: 10px;*/
 }
+
 .transaction-toolbar button:hover {
   background: #444;
+}
+
+/* Expense search, title filter and sort */
+.expense-toolbar {
+  margin-bottom: 14px;
+}
+
+.expense-toolbar input,
+.expense-toolbar select {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #252525;
+  font: inherit;
+}
+
+.expense-toolbar input[type="search"] {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Expense table */
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.expense-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.expense-table td:nth-child(2) {
+  overflow-wrap: anywhere;
+}
+
+.expense-table th:nth-child(3),
+.expense-table td:nth-child(3) {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.expense-table th:nth-child(4),
+.expense-table td:nth-child(4) {
+  width: 70px;
+  text-align: center;
+}
+
+.expense-details-button {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #252525;
+  font: inherit;
+  cursor: pointer;
+}
+
+.expense-details-button:hover {
+  background: #eee;
+}
+
+/* New expense and details popup */
+.transaction-popup {
+  width: min(440px, 90vw);
+  margin: auto;
+  padding: 28px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  box-shadow: 0 12px 40px rgb(0 0 0 / 15%);
+}
+
+.transaction-popup::backdrop {
+  background: rgb(0 0 0 / 25%);
+}
+
+.transaction-popup form {
+  display: grid;
+  gap: 16px;
+}
+
+.transaction-popup h2 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+.transaction-popup label {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.transaction-popup input,
+.transaction-popup textarea,
+.transaction-popup select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  font: inherit;
+  font-weight: 400;
+}
+
+.transaction-popup textarea {
+  resize: vertical;
+}
+
+.popup-amount-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  gap: 12px;
+}
+
+.transaction-popup .popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.transaction-popup button {
+  padding: 9px 18px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  font: inherit;
+  cursor: pointer;
+}
+
+.transaction-popup button[type="submit"] {
+  border-color: #222;
+  background: #222;
+  color: #fff;
 }
