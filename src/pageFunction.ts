@@ -104,5 +104,5 @@ saveBudgetCategoryAmount?.addEventListener("click", () => {
 show_transaction_amount?.addEventListener("click", () =>
 {
     const money = Q.showTransactionAmount();
-    return money;
+    console.log("money amt: " + money);
 });
