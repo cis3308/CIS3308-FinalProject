@@ -43,7 +43,14 @@ header nav .profile {
     align-items: center;
     padding: 10px;
 }
-.budget-page .pie-chart svg{
+
+#pie-chart-container {
+    width: 400px;
+    height: 400px;
+}
+
+
+#pie-chart-container svg{
     background-color: lightgray;
     margin: 0 0 20px 0;
 }

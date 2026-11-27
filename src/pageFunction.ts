@@ -1,4 +1,59 @@
+import data from "./mockData.json";
+declare const d3: typeof import("d3");
 
+interface Expense {
+    category: string;
+    budget: number;
+    spent: number;
+}
+
+const expenses: Expense[] = data.expenses;
+
+console.log(expenses);
+
+///////////////////////////////////////////////
+const mockdata = expenses.map(expense => ({
+    category: expense.category,
+    value: expense.budget
+}));
+
+const width = 400;
+const height = 400;
+const radius = Math.min(width, height) / 2;
+
+const svg = d3.select("#pie-chart-container")
+    .append("svg")
+    .attr("viewBox", `0 0 ${width} ${height}`)
+    .append("g")
+    .attr("transform", `translate(${width / 2}, ${height / 2})`)
+
+const color = d3.scaleOrdinal(d3.schemeTableau10);
+
+const pie = d3.pie()
+    .value(d => d.value)
+    .sort(null);
+
+const arc = d3.arc()
+    .innerRadius(0)
+    .outerRadius(radius);
+
+function update(mockdata){
+    const nonZeroData = mockdata.filter(d => d.value > 0);
+    const pieData = pie(nonZeroData);
+
+    svg.selectAll("path")
+        .data(pieData, d => d.data.category)
+        .join("path")
+        .attr("fill", d => color(d.data.category))
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 4)
+        .transition().duration(400)
+        .attr("d", arc);
+
+}
+
+update(mockdata); 
+///////////////////////////////////////////////
 
 console.log("pageFunction.ts is running");
 
@@ -17,7 +72,38 @@ const addBudgetIncome = document.getElementById("income-button");
 
 const saveBudgetCategoryAmount = document.getElementById("save-category-budget");
 
-let doneEditing = false;
+const budgetList = document.getElementById("expense-list");
+
+function displayExpenses() {
+
+    if (!budgetList) return;
+
+    budgetList.innerHTML = "";
+
+    expenses.forEach(expense => {
+
+        const category = document.createElement("div");
+        category.classList.add("expense-category");
+
+        category.innerHTML = `
+            <div class="top">
+                <span>${expense.category}</span>
+                <span class="amount">${expense.budget}</span>
+            </div>
+
+            <div class="bar">
+                <svg width="20" height="10"></svg>
+            </div>
+
+            <span>Spent: ${expense.spent}</span>
+            <span>Left: ${expense.budget - expense.spent}</span>
+        `;
+
+        budgetList.appendChild(category);
+    });
+}
+
+displayExpenses();
 
 addButton?.addEventListener("click", () => {
     addCategoryPopup?.classList.remove("hidden");
@@ -27,46 +113,49 @@ cancelButton?.addEventListener("click", () => {
     addCategoryPopup?.classList.add("hidden");
 });
 
+let doneEditing = false;
+
 editButton?.addEventListener("click", () => {
 
-    const amounts = document.querySelectorAll(".amount");
+    const amounts = document.querySelectorAll<HTMLElement>(".amount");
 
     if (!doneEditing) {
 
-        for (const amount of amounts) {
-            const currentCategoryBudget = amount.textContent;
+        amounts.forEach((amount, index) => {
 
             const input = document.createElement("input");
+
             input.type = "number";
-            input.value = currentCategoryBudget ?? "";
+            input.value = String(expenses[index].budget);
+            input.classList.add("amount");
 
             amount.replaceWith(input);
-            input.classList.add("amount");
-        };
+        });
 
         editButton.textContent = "Save";
         doneEditing = true;
 
-    } 
-    else {
+    } else {
 
-        const inputs = document.querySelectorAll<HTMLInputElement>(
-            ".amount"
-        );
+        const inputs = document.querySelectorAll<HTMLInputElement>(".amount");
 
-        for (const input of inputs) {
-            const newCategoryBudget = document.createElement("span");
+        inputs.forEach((input, index) => {
 
-            newCategoryBudget.classList.add("amount");
-            newCategoryBudget.textContent = input.value;
+            expenses[index].budget = Number(input.value);
+        });
 
-            input.replaceWith(newCategoryBudget);
-        };
+        displayExpenses();
+
+        const updatedData = expenses.map(expense => ({
+            category: expense.category,
+            value: expense.budget
+        }));
+
+        update(updatedData);
 
         editButton.textContent = "Edit";
         doneEditing = false;
     }
-
 });
 
 saveBudgetButton?.addEventListener("click", () => {

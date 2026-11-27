@@ -2,6 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="src/BudgetStyle.css" />
     <title>Budget</title>
   </head>
@@ -29,11 +30,8 @@
             <div class="title">
                 <h1>January</h1>
             </div>
-            <div id="pieChart">
-                <svg width="200" height="200">
+            <div id="pie-chart-container"></div>
 
-                </svg>
-            </div>
             <a href="src/setBudgetPage.html">
                 <button id="set-budget">Set Budget</button>
             </a>
@@ -51,44 +49,8 @@
                 <div class="income">
                     income
                 </div>
-                <div class="expense">
-                    <div class="expense-category">
-                        <div class="top">
-                            <svg width="10" height="10"></svg>
-                            <span>Food</span>
-                            <span class="amount">$200</span>
-                        </div>
-                        <div class="bar">
-                            <svg width="20" height="10"></svg>
-                        </div>
-                        <span>:spent</span>
-                        <span>:left</span>
-                    </div>
-                    
-                    <div class="expense-category">
-                        <div class="top">
-                            <svg width="10" height="10"></svg>
-                            <span>Food</span>
-                            <span class="amount">$200</span>
-                        </div>
-                        <div class="bar">
-                            <svg width="20" height="10"></svg>
-                        </div>
-                        <span>:spent</span>
-                        <span>:left</span>
-                    </div>
-                    <div class="expense-category">
-                        <div class="top">
-                            <svg width="10" height="10"></svg>
-                            <span>Food</span>
-                            <span class="amount">$200</span>
-                        </div>
-                        <div class="bar">
-                            <svg width="20" height="10"></svg>
-                        </div>
-                        <span>:spent</span>
-                        <span>:left</span>
-                    </div>
+                <div class="expense" id="expense-list">
+                    <svg width="10" height="10"></svg>
                 </div>
             </div>
         </div>
@@ -111,5 +73,4 @@
 
     <script type="module" src="src/pageFunction.ts"></script>
   </body>
-</html>
 </html>
