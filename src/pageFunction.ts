@@ -1,4 +1,4 @@
-
+import * as Q from "./db/Queries"
 
 console.log("pageFunction.ts is running");
 
@@ -16,6 +16,14 @@ const addBudgetCategory = document.getElementById("budget-button");
 const addBudgetIncome = document.getElementById("income-button");
 
 const saveBudgetCategoryAmount = document.getElementById("save-category-budget");
+
+const show_events = document.getElementById("event-entries");
+const show_transaction_amount = document.getElementById("trans-amt");
+const show_transactions = document.getElementById("trans-entries");
+const show_total_balance = document.getElementById("total-balance");
+
+const add_balance = document.getElementById("set-budget");
+const new_transaction = document.getElementById("new-trans");
 
 let doneEditing = false;
 
@@ -91,4 +99,10 @@ addBudgetIncome?.addEventListener("click", () => {
 
 saveBudgetCategoryAmount?.addEventListener("click", () => {
 
+});
+
+show_transaction_amount?.addEventListener("click", () =>
+{
+    const money = Q.showTransactionAmount();
+    return money;
 });
