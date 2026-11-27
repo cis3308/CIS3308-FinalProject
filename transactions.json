@@ -1,0 +1,226 @@
+{
+  "monthly_budget": 120000,
+  "budget_currency": "JPY",
+  "transactions": [
+    {
+      "t_id": 22,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Lunch",
+      "description": "Lunch at the campus cafeteria",
+      "amount": 750,
+      "currency": "JPY",
+      "t_date": "2026-11-20"
+    },
+    {
+      "t_id": 21,
+      "u_id": 1,
+      "t_type": "income",
+      "title": "English tutoring",
+      "description": "Payment for a two-hour lesson",
+      "amount": 5000,
+      "currency": "JPY",
+      "t_date": "2026-11-20"
+    },
+    {
+      "t_id": 20,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Suica recharge",
+      "description": "Added money to my transit card",
+      "amount": 3000,
+      "currency": "JPY",
+      "t_date": "2026-11-19"
+    },
+    {
+      "t_id": 1,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Groceries",
+      "description": "Grocery shopping",
+      "amount": 4500,
+      "currency": "JPY",
+      "t_date": "2026-11-18"
+    },
+    {
+      "t_id": 19,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Coffee",
+      "description": "Iced latte in Sangenjaya",
+      "amount": 480,
+      "currency": "JPY",
+      "t_date": "2026-11-18"
+    },
+    {
+      "t_id": 18,
+      "u_id": 1,
+      "t_type": "income",
+      "title": "Textbook sale",
+      "description": "Sold last semester's statistics textbook",
+      "amount": 2200,
+      "currency": "JPY",
+      "t_date": "2026-11-17"
+    },
+    {
+      "t_id": 17,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Electricity bill",
+      "description": "October electricity payment",
+      "amount": 5300,
+      "currency": "JPY",
+      "t_date": "2026-11-16"
+    },
+    {
+      "t_id": 2,
+      "u_id": 1,
+      "t_type": "income",
+      "title": "Salary",
+      "description": "November payment",
+      "amount": 80000,
+      "currency": "JPY",
+      "t_date": "2026-11-15"
+    },
+    {
+      "t_id": 16,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Dinner",
+      "description": "Dinner with friends after class",
+      "amount": 1850,
+      "currency": "JPY",
+      "t_date": "2026-11-14"
+    },
+    {
+      "t_id": 15,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Phone bill",
+      "description": "Monthly mobile plan",
+      "amount": 2980,
+      "currency": "JPY",
+      "t_date": "2026-11-13"
+    },
+    {
+      "t_id": 14,
+      "u_id": 1,
+      "t_type": "income",
+      "title": "Translation work",
+      "description": "Translated a short product guide",
+      "amount": 12000,
+      "currency": "JPY",
+      "t_date": "2026-11-12"
+    },
+    {
+      "t_id": 13,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Groceries",
+      "description": "Chicken, rice, eggs and vegetables",
+      "amount": 6200,
+      "currency": "JPY",
+      "t_date": "2026-11-11"
+    },
+    {
+      "t_id": 12,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Gym membership",
+      "description": "November membership fee",
+      "amount": 6000,
+      "currency": "JPY",
+      "t_date": "2026-11-10"
+    },
+    {
+      "t_id": 11,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Movie ticket",
+      "description": "Evening screening in Shibuya",
+      "amount": 1500,
+      "currency": "JPY",
+      "t_date": "2026-11-09"
+    },
+    {
+      "t_id": 10,
+      "u_id": 1,
+      "t_type": "income",
+      "title": "Weekend shift",
+      "description": "Payment for helping at a local event",
+      "amount": 8500,
+      "currency": "JPY",
+      "t_date": "2026-11-08"
+    },
+    {
+      "t_id": 9,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Stationery",
+      "description": "Notebooks and pens for class",
+      "amount": 800,
+      "currency": "JPY",
+      "t_date": "2026-11-07"
+    },
+    {
+      "t_id": 8,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Internet bill",
+      "description": "Monthly home internet plan",
+      "amount": 4400,
+      "currency": "JPY",
+      "t_date": "2026-11-06"
+    },
+    {
+      "t_id": 7,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Pharmacy",
+      "description": "Toothpaste, shampoo and soap",
+      "amount": 1300,
+      "currency": "JPY",
+      "t_date": "2026-11-05"
+    },
+    {
+      "t_id": 6,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Laundry",
+      "description": "Washed and dried a winter blanket",
+      "amount": 900,
+      "currency": "JPY",
+      "t_date": "2026-11-04"
+    },
+    {
+      "t_id": 5,
+      "u_id": 1,
+      "t_type": "income",
+      "title": "Family support",
+      "description": "Monthly contribution toward living expenses",
+      "amount": 50000,
+      "currency": "JPY",
+      "t_date": "2026-11-03"
+    },
+    {
+      "t_id": 4,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Groceries",
+      "description": "First supermarket trip of the month",
+      "amount": 5040,
+      "currency": "JPY",
+      "t_date": "2026-11-02"
+    },
+    {
+      "t_id": 3,
+      "u_id": 1,
+      "t_type": "expense",
+      "title": "Rent",
+      "description": "November apartment rent",
+      "amount": 65000,
+      "currency": "JPY",
+      "t_date": "2026-11-01"
+    }
+  ]
+}
