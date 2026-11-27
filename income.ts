@@ -9,8 +9,8 @@ type Income = {
 };
 
 function renderIncomePage(): void {
-    const incomes: Income[] = [];
-    const monthlyBudgetJPY = 10_000_000;
+    const incomes: Income[] = []; 
+    const monthlyBudgetJPY = 10_000_000; // call backend
 
     for (const item of data.transactions) {
         if (item.t_type !== "income") {
@@ -180,7 +180,7 @@ function renderIncomePage(): void {
         form.reset();
         amountInput.setCustomValidity("");
 
-        const titles = new Set(["Salary", "Freelance", "Scholarship", "Allowance", "Gift"]);
+        const titles = new Set(["Salary", "Freelance", "Scholarship", "Allowance", "Gift"]); // call backend category will come from backend
         for (const item of incomes) {
             titles.add(item.title);
         }
@@ -215,7 +215,7 @@ function renderIncomePage(): void {
         popup.showModal();
         titleInput.focus();
     }
-
+    // call backend send data to backend 
     function renderMonth(): void {
         const selectedMonth = monthInput.value;
         const totals = new Map<string, number>([["JPY", 0]]);
@@ -271,7 +271,7 @@ function renderIncomePage(): void {
         budgetLeft.textContent =
             `Monthly Budget Left\n${formatAmount(monthlyBudgetJPY - spentJPY, "JPY")}`;
     }
-
+// call backend getting total expense and budgetleft. 
     monthInput.addEventListener("change", () => {
         if (!monthInput.value) {
             monthInput.value = getToday().slice(0, 7);

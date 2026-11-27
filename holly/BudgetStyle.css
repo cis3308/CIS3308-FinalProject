@@ -1,0 +1,134 @@
+
+header {
+    background-color: lightgray;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+header nav {
+    display: flex;
+    width: 100%;
+}
+
+header nav a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    margin-left: 50px;
+}
+
+header nav img {
+    height: 20px;
+    width: 20px;
+    padding-right: 40px;
+}
+
+header nav .profile {
+    display: inline-block;
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.budget-page {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap:30px;
+    margin-top: 30px;
+}
+
+.budget-page .pie-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+.budget-page .pie-chart svg{
+    background-color: lightgray;
+    margin: 0 0 20px 0;
+}
+
+.budget-page .budget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.budget-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 80%;
+
+}
+
+.income {
+    background-color:lightgray;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.expense {
+    background-color: lightgray;
+}
+
+.expense-category {
+    background-color: gray;
+    margin: 20px 0 20px 0;
+    padding: 5px 20px 10px 20px;
+}
+
+.top svg {
+  background-color: lightgray;
+}
+
+.bar {
+  background-color: lightgray;
+}
+
+.amount {
+  width: 60;
+  margin-right: 80px;
+}
+
+.budget-buttons {
+    display:flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#edit {
+    margin-left:auto;
+}
+
+.hidden {
+    display: none;
+}
+
+#category-popup {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    bottom: 0;
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#cancel {
+    border-radius: 50px;
+    width: fit-content;
+    justify-content: flex-end;
+}
