@@ -9,147 +9,86 @@ type Expense = {
 };
 
 function renderExpensePage(): void {
+    const expenses: Expense[] = [];
+    const monthlyBudgetJPY = 10_000_000;
+
+    for (const transaction of data.transactions) {
+        if (transaction.t_type === "expense") {
+            let description = "";
+
+            if ("description" in transaction && typeof transaction.description === "string") {
+                description = transaction.description;
+            }
+
+            expenses.push({
+                t_date: transaction.t_date,
+                title: transaction.title.trim(),
+                amount: transaction.amount,
+                currency: transaction.currency.trim().toUpperCase(),
+                description: description
+            });
+        }
+    }
+
     // Navigation
     const header = document.createElement("header");
 
-    const navbar = document.createElement("nav");
-    navbar.className = "topbar";
+    header.innerHTML = `
+        <nav class="topbar">
+            <a class="brand" href="budgetingapppage.html">Budgeting</a>
 
-    const homeLink = document.createElement("a");
-    homeLink.className = "brand";
-    homeLink.href = "mainpage.html";
-    homeLink.textContent = "Budgeting";
+            <span class="app-title">
+                <span>Budgeting App</span>
+                <span>Split</span>
+            </span>
 
-    const appTitle = document.createElement("span");
-    appTitle.className = "app-title";
+            <details class="account">
+                <summary>Account</summary>
+                <div class="account-panel">Guest account</div>
+            </details>
+        </nav>
+    `;
 
-    const budgetingTab = document.createElement("span");
-    budgetingTab.textContent = "Budgeting App";
-
-    const splitTab = document.createElement("span");
-    splitTab.textContent = "Split";
-
-    appTitle.append(budgetingTab, splitTab);
-
-    const accountMenu = document.createElement("details");
-    accountMenu.className = "account";
-
-    const accountLabel = document.createElement("summary");
-    accountLabel.textContent = "Account";
-
-    const accountPanel = document.createElement("div");
-    accountPanel.className = "account-panel";
-    accountPanel.textContent = "Guest account";
-
-    accountMenu.append(accountLabel, accountPanel);
-    navbar.append(homeLink, appTitle, accountMenu);
-    header.append(navbar);
-
-    // Load expenses
-    const expenses: Expense[] = [];
-
-    for (const transaction of data.transactions) {
-        if (transaction.t_type !== "expense") {
-            continue;
-        }
-
-        expenses.push({
-            t_date: transaction.t_date,
-            title: transaction.title.trim(),
-            amount: transaction.amount,
-            currency: transaction.currency.trim().toUpperCase(),
-            description:
-                "description" in transaction && typeof transaction.description === "string"
-                    ? transaction.description
-                    : ""
-        });
-    }
-
-    // Overview
-    const monthlyBudgetJPY = 10_000_000;
-
+    // Overview and expense table
     const main = document.createElement("main");
     main.className = "income-page";
 
-    const overview = document.createElement("div");
-    overview.className = "overview";
+    main.innerHTML = `
+        <div class="overview">
+            <section class="expense">
+                <h1></h1>
+            </section>
 
-    const monthlyExpense = document.createElement("section");
-    monthlyExpense.className = "expense";
-
-    const expenseTitle = document.createElement("h1");
-    monthlyExpense.append(expenseTitle);
-
-    const monthlyBudgetLeft = document.createElement("section");
-    monthlyBudgetLeft.className = "monthly-budget-left";
-
-    overview.append(monthlyExpense, monthlyBudgetLeft);
-
-    function formatAmount(amount: number, currency: string): string {
-        return `${amount.toLocaleString("en-US")} ${currency}`;
-    }
-
-    function updateOverview(): void {
-        const totals = new Map<string, number>([["JPY", 0]]);
-
-        for (const expense of expenses) {
-            const previousTotal = totals.get(expense.currency) ?? 0;
-            totals.set(expense.currency, previousTotal + expense.amount);
-        }
-
-        const amounts: string[] = [];
-        totals.forEach((amount, currency) => {
-            amounts.push(formatAmount(amount, currency));
-        });
-
-        expenseTitle.textContent = `Expense: ${amounts.join(" / ")}`;
-
-        const remainingBudget = monthlyBudgetJPY - (totals.get("JPY") ?? 0);
-        monthlyBudgetLeft.textContent =
-            `Monthly Budget Left\n${formatAmount(remainingBudget, "JPY")}`;
-    }
-
-    // Search, filters and transaction table
-    const transactions = document.createElement("section");
-    transactions.className = "recent-transactions";
-
-    transactions.innerHTML = `
-        <div class="transaction-toolbar expense-toolbar">
-            <input type="search" placeholder="Search transactions" aria-label="Search transactions">
-
-            <select name="title-filter" aria-label="Filter by title"></select>
-
-            <select name="sort" aria-label="Sort transactions">
-                <option value="newest">Newest first</option>
-                <option value="oldest">Oldest first</option>
-                <option value="title">Title A–Z</option>
-                <option value="lowest">Amount: low to high</option>
-                <option value="highest">Amount: high to low</option>
-            </select>
-
-            <button type="button">New</button>
+            <section class="monthly-budget-left"></section>
         </div>
 
-        <table class="expense-table" aria-label="Expenses">
-            <thead>
-                <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Details</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <section class="recent-transactions">
+            <div class="transaction-toolbar expense-toolbar">
+                <button type="button" disabled>Sort</button>
+                <button type="button" disabled>Filter</button>
+                <button type="button" id="new-expense">New</button>
+            </div>
+
+            <table class="expense-table" aria-label="Expenses">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
     `;
 
-    const searchInput = transactions.querySelector<HTMLInputElement>('input[type="search"]')!;
-    const titleFilter = transactions.querySelector<HTMLSelectElement>('[name="title-filter"]')!;
-    const sortSelect = transactions.querySelector<HTMLSelectElement>('[name="sort"]')!;
-    const newButton = transactions.querySelector("button")!;
-    const tableBody = transactions.querySelector("tbody")!;
+    const expenseTitle = main.querySelector("h1")!;
+    const monthlyBudgetLeft = main.querySelector(".monthly-budget-left")!;
+    const tableBody = main.querySelector("tbody")!;
+    const newButton = main.querySelector("#new-expense")!;
 
-    // One popup for both New and Details
+    // New and Edit popup
     const popup = document.createElement("dialog");
     popup.className = "transaction-popup";
     popup.setAttribute("aria-labelledby", "expense-popup-title");
@@ -201,47 +140,42 @@ function renderExpensePage(): void {
     `;
 
     const form = popup.querySelector("form")!;
-    const popupTitle = popup.querySelector("h2")!;
+    const popupTitle = form.querySelector("h2")!;
     const titleInput = form.querySelector<HTMLInputElement>('[name="title"]')!;
     const titleSuggestions = form.querySelector("datalist")!;
-    const descriptionInput = form.querySelector<HTMLTextAreaElement>('[name="description"]')!;
+    const descriptionInput = form.querySelector("textarea")!;
     const amountInput = form.querySelector<HTMLInputElement>('[name="amount"]')!;
-    const currencySelect = form.querySelector<HTMLSelectElement>('[name="currency"]')!;
+    const currencySelect = form.querySelector("select")!;
     const dateInput = form.querySelector<HTMLInputElement>('[name="date"]')!;
     const cancelButton = form.querySelector<HTMLButtonElement>('button[type="button"]')!;
     const saveButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
     let editingExpense: Expense | null = null;
 
-    // Use the same titles in the filter and in the popup suggestions.
-    function updateTitleOptions(): void {
-        const selectedTitle = titleFilter.value;
-        const titles = new Map<string, string>();
+    function formatAmount(amount: number, currency: string): string {
+        return `${amount.toLocaleString("en-US")} ${currency}`;
+    }
 
-        for (const title of ["Groceries", "Rent", "Transport", "Coffee", "Dinner"]) {
-            titles.set(title.toLowerCase(), title);
-        }
+    function updateOverview(): void {
+        const totals = new Map<string, number>();
+        totals.set("JPY", 0);
 
         for (const expense of expenses) {
-            const key = expense.title.toLowerCase();
-            if (!titles.has(key)) {
-                titles.set(key, expense.title);
-            }
+            const previousTotal = totals.get(expense.currency) ?? 0;
+            totals.set(expense.currency, previousTotal + expense.amount);
         }
 
-        const sortedTitles = Array.from(titles.values()).sort((a, b) =>
-            a.localeCompare(b)
-        );
+        const amounts: string[] = [];
 
-        titleFilter.replaceChildren(new Option("All titles", ""));
-        titleSuggestions.replaceChildren();
+        totals.forEach((amount, currency) => {
+            amounts.push(formatAmount(amount, currency));
+        });
 
-        for (const title of sortedTitles) {
-            titleFilter.add(new Option(title, title.toLowerCase()));
-            titleSuggestions.append(new Option(title, title));
-        }
+        expenseTitle.textContent = `Expense: ${amounts.join(" / ")}`;
 
-        titleFilter.value = titles.has(selectedTitle) ? selectedTitle : "";
+        const remainingBudget = monthlyBudgetJPY - (totals.get("JPY") ?? 0);
+        monthlyBudgetLeft.textContent =
+            `Monthly Budget Left\n${formatAmount(remainingBudget, "JPY")}`;
     }
 
     function openPopup(expense: Expense | null): void {
@@ -250,64 +184,36 @@ function renderExpensePage(): void {
         amountInput.setCustomValidity("");
 
         if (expense) {
-            popupTitle.textContent = "Expense Details";
-            saveButton.textContent = "Save Changes";
-
+            popupTitle.textContent = "Edit Expense";
+            saveButton.textContent = "Save";
             titleInput.value = expense.title;
             descriptionInput.value = expense.description;
             amountInput.value = String(expense.amount);
+
+            if (!Array.from(currencySelect.options).some(option => option.value === expense.currency)) {
+                currencySelect.add(new Option(expense.currency, expense.currency));
+            }
+
             currencySelect.value = expense.currency;
             dateInput.value = expense.t_date;
         } else {
             popupTitle.textContent = "New Expense";
             saveButton.textContent = "Add";
-
-            const today = new Date();
-            const month = String(today.getMonth() + 1).padStart(2, "0");
-            const day = String(today.getDate()).padStart(2, "0");
-            dateInput.value = `${today.getFullYear()}-${month}-${day}`;
         }
 
         popup.showModal();
-        titleInput.focus();
     }
 
     function renderTable(): void {
-        const search = searchInput.value.trim().toLowerCase();
-
-        const visibleExpenses = expenses.filter((expense) => {
-            const title = expense.title.toLowerCase();
-            const text = [
-                expense.t_date,
-                title,
-                expense.amount,
-                formatAmount(expense.amount, expense.currency)
-            ].join(" ").toLowerCase();
-
-            return (!titleFilter.value || title === titleFilter.value)
-                && text.includes(search);
-        });
-
-        visibleExpenses.sort((a, b) => {
-            switch (sortSelect.value) {
-                case "oldest":
-                    return a.t_date.localeCompare(b.t_date);
-                case "title":
-                    return a.title.localeCompare(b.title);
-                case "lowest":
-                    return a.currency.localeCompare(b.currency) || a.amount - b.amount;
-                case "highest":
-                    return a.currency.localeCompare(b.currency) || b.amount - a.amount;
-                default:
-                    return b.t_date.localeCompare(a.t_date);
-            }
-        });
-
         tableBody.replaceChildren();
+        titleSuggestions.replaceChildren();
 
-        for (const expense of visibleExpenses) {
+        const titles = new Set<string>();
+
+        for (const expense of expenses) {
+            titles.add(expense.title);
+
             const row = tableBody.insertRow();
-
             row.insertCell().textContent = expense.t_date;
             row.insertCell().textContent = expense.title;
             row.insertCell().textContent = formatAmount(expense.amount, expense.currency);
@@ -322,17 +228,16 @@ function renderExpensePage(): void {
             row.insertCell().append(detailsButton);
         }
 
-        if (visibleExpenses.length === 0) {
+        titles.forEach(title => {
+            titleSuggestions.append(new Option(title, title));
+        });
+
+        if (expenses.length === 0) {
             const cell = tableBody.insertRow().insertCell();
             cell.colSpan = 4;
-            cell.textContent = "No matching expenses.";
+            cell.textContent = "No expenses yet.";
         }
     }
-
-    // Events
-    searchInput.addEventListener("input", renderTable);
-    titleFilter.addEventListener("change", renderTable);
-    sortSelect.addEventListener("change", renderTable);
 
     newButton.addEventListener("click", () => openPopup(null));
     cancelButton.addEventListener("click", () => popup.close());
@@ -342,13 +247,14 @@ function renderExpensePage(): void {
         event.preventDefault();
 
         const title = titleInput.value.trim();
-        if (!title) {
+        const amount = Number(amountInput.value);
+
+        if (title === "") {
             titleInput.value = "";
             titleInput.reportValidity();
             return;
         }
 
-        const amount = Number(amountInput.value);
         if (!Number.isSafeInteger(amount) || amount <= 0) {
             amountInput.setCustomValidity("Enter a valid positive whole number.");
             amountInput.reportValidity();
@@ -357,8 +263,8 @@ function renderExpensePage(): void {
 
         const values: Expense = {
             t_date: dateInput.value,
-            title,
-            amount,
+            title: title,
+            amount: amount,
             currency: currencySelect.value,
             description: descriptionInput.value.trim()
         };
@@ -369,18 +275,14 @@ function renderExpensePage(): void {
             expenses.unshift(values);
         }
 
-        updateTitleOptions();
         updateOverview();
         renderTable();
         popup.close();
     });
 
-    updateTitleOptions();
+    document.body.append(header, main, popup);
     updateOverview();
     renderTable();
-
-    main.append(overview, transactions);
-    document.body.append(header, main, popup);
 }
 
 renderExpensePage();
