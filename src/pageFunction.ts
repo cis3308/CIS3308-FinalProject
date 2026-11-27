@@ -19,7 +19,7 @@ const mockdata = expenses.map(expense => ({
 
 const width = 400;
 const height = 400;
-const radius = Math.min(width, height) / 2;
+const radius = (Math.min(width, height) / 2) - 10;
 
 const svg = d3.select("#pie-chart-container")
     .append("svg")
