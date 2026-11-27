@@ -94,7 +94,7 @@ a[href]:hover,
   white-space: nowrap;
 }
 
-/* Monthly budget */
+/* Main page */
 main {
   width: 86%;
   max-width: 1120px;
@@ -143,7 +143,7 @@ main {
   background: #f0f0f0;
 }
 
-/* Recent transactions */
+/* Recent transactions on the main page */
 .recent-transactions {
   margin-top: 36px;
 }
@@ -168,9 +168,16 @@ main {
   tab-size: 80;
 }
 
-/* Income and expense pages */
+/* Income page */
 .income-page {
   margin: 40px auto;
+}
+
+.income-page .month-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .income-page .overview {
@@ -180,9 +187,18 @@ main {
   gap: 32px;
 }
 
+.income-page #income-chart {
+  min-height: 120px;
+}
+
 .monthly-budget-left {
   margin: 0;
   font-size: 32px;
+}
+
+.income-page .monthly-budget-left strong,
+.income-page #budget-total span {
+  display: block;
 }
 
 /* Transaction toolbar */
@@ -216,7 +232,6 @@ main {
   background: #444;
 }
 
-/* Expense search, title filter and sort */
 .expense-toolbar {
   margin-bottom: 14px;
 }
@@ -237,7 +252,25 @@ main {
   min-width: 0;
 }
 
-/* Expense table */
+/* Income transaction filters */
+.income-page .recent-transactions {
+  width: 100%;
+  margin: 24px auto 0;
+}
+
+.income-page .transaction-toolbar {
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 0 16px;
+}
+
+.income-page .transaction-toolbar select {
+  min-width: 145px;
+  height: 40px;
+  font-size: 16px;
+}
+
+/* Transaction table */
 .expense-table {
   width: 100%;
   border-collapse: collapse;
@@ -271,7 +304,35 @@ main {
   text-align: center;
 }
 
+/* Income transaction rows */
+.income-page .expense-table {
+  font-size: 17px;
+}
+
+.income-page .expense-table th,
+.income-page .expense-table td {
+  width: auto;
+  padding: 14px 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.income-page .expense-table td:nth-child(4) {
+  white-space: nowrap;
+}
+
+/* Details column */
+.income-page .expense-table th:last-child,
+.income-page .expense-table td:last-child:not([colspan]) {
+  width: 1%;
+  padding: 8px;
+  text-align: right;
+  white-space: nowrap;
+}
+
 .expense-details-button {
+  display: inline-block;
+  width: auto;
   padding: 5px 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -281,11 +342,16 @@ main {
   cursor: pointer;
 }
 
+.income-page .expense-details-button {
+  font-size: 16px;
+  line-height: normal;
+}
+
 .expense-details-button:hover {
   background: #eee;
 }
 
-/* New expense and details popup */
+/* New transaction and details popup */
 .transaction-popup {
   width: min(440px, 90vw);
   margin: auto;
@@ -364,4 +430,38 @@ main {
   border-color: #222;
   background: #222;
   color: #fff;
+}
+/* Login page */
+.login-page {
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.login-page button {
+  width: 300px;
+  height: 64px;
+  border: 0;
+  border-radius: 8px;
+  background: #252525;
+  color: #fff;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-page button:hover {
+  background: #444;
+}
+
+.login-page button.logged-in {
+  background: #237a42;
+  color: #fff;
+  opacity: 1;
+  cursor: default;
 }
