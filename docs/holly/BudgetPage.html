@@ -1,0 +1,116 @@
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget</title>
+    <script type="module" crossorigin src="/CIS3308-FinalProject/assets/modulepreload-polyfill-P2Xu9kJm.js"></script>
+    <script type="module" crossorigin src="/CIS3308-FinalProject/assets/pageFunction-B-idV4je.js"></script>
+    <link rel="stylesheet" crossorigin href="/CIS3308-FinalProject/assets/budget-iV03vE5X.css">
+  </head>
+
+  <body>
+    <div>
+        <header>
+            <nav>
+                <img src="" alt="logo" />
+                <a href="#">
+                    My Budget
+                </a>
+                <a href="#">
+                    Split
+                </a>
+                <div class="profile">
+                    <a>Profile</a>
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <div class="budget-page">
+        <div class="pie-chart">
+            <div class="title">
+                <h1>January</h1>
+            </div>
+            <div id="pieChart">
+                <svg width="200" height="200">
+
+                </svg>
+            </div>
+            <a href="/holly/setBudgetPage.html">
+                <button id="set-budget">Set Budget</button>
+            </a>
+        </div>
+
+        <div class="budget">
+            <div class="title">
+                <h2>Budget</h2>
+            </div>
+            <div class="budget-list">
+                <div class="budget-buttons">
+                    <button id="add">+ add category</button>
+                    <button id="edit">Edit</button>
+                </div>
+                <div class="income">
+                    income
+                </div>
+                <div class="expense">
+                    <div class="expense-category">
+                        <div class="top">
+                            <svg width="10" height="10"></svg>
+                            <span>Food</span>
+                            <span class="amount">$200</span>
+                        </div>
+                        <div class="bar">
+                            <svg width="20" height="10"></svg>
+                        </div>
+                        <span>:spent</span>
+                        <span>:left</span>
+                    </div>
+
+                    <div class="expense-category">
+                        <div class="top">
+                            <svg width="10" height="10"></svg>
+                            <span>Food</span>
+                            <span class="amount">$200</span>
+                        </div>
+                        <div class="bar">
+                            <svg width="20" height="10"></svg>
+                        </div>
+                        <span>:spent</span>
+                        <span>:left</span>
+                    </div>
+                    <div class="expense-category">
+                        <div class="top">
+                            <svg width="10" height="10"></svg>
+                            <span>Food</span>
+                            <span class="amount">$200</span>
+                        </div>
+                        <div class="bar">
+                            <svg width="20" height="10"></svg>
+                        </div>
+                        <span>:spent</span>
+                        <span>:left</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="category-popup-container" class="hidden">
+    <div class="category-popup">
+        <div class="popup-content">
+            <button id="cancel">x</button>
+            <h2>Add Category</h2>
+            <label for="category-name">Category Name</label>
+            <input id="category-name" type="text">
+            <label for="category-limit">Budget Amount</label>
+            <input id="category-limit" type="number">
+            <button id="add-new">Add</button>
+        </div>
+    </div>
+    </div>
+
+
+  </body>
+</html>
+</html>
