@@ -1,0 +1,19 @@
+{
+    "expenses": [
+        {
+            "category": "rent",
+            "budget": 800,
+            "spent": 500
+        },
+        {
+            "category": "Groceries",
+            "budget": 200,
+            "spent": 150
+        },
+        {
+            "category": "entertainment",
+            "budget": 50,
+            "spent": 50
+        }
+    ]
+}

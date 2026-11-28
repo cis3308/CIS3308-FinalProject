@@ -1,0 +1,79 @@
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href= "./style.css"> />
+    <link rel="stylesheet" href= "BudgetStyle.css"> />
+    <title>Budget</title>
+  </head>
+
+  <body>
+    <div>
+        <header>
+            <nav>
+                <a class="brand" href="mainPage.html">
+                    Budgeting
+                </a>
+                <span class="app-title">
+                    <span>Budgeting</span>
+                    <span>Split</span>
+                </span>
+                <details class="account">
+                    <summary>Account</summary>
+                    <div class="account-panel">
+                        guest account
+                    </div>
+                </details>
+            </nav>
+        </header>
+    </div>
+
+    <div class="budget-page">
+        <div class="pie-chart">
+            <div class="title">
+                <h1>January</h1>
+            </div>
+            <div id="pie-chart-container"></div>
+
+            <a href="setBudgetPage.html">
+                <button id="set-budget">Set Budget</button>
+            </a>
+        </div>
+
+        <div class="budget">
+            <div class="title">
+                <h2>Budget</h2>
+            </div>
+            <div class="budget-list">
+                <div class="budget-buttons">
+                    <button id="add">+ add category</button>
+                    <button id="edit">Edit</button>
+                </div>
+                <div id="balance">
+                    balance
+                </div>
+                <div class="expense" id="expense-list">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="category-popup-container" class="hidden">
+    <div class="category-popup">
+        <div class="popup-content">
+            <button id="cancel">x</button>
+            <h2>Add Category</h2>
+            <label for="category-name">Category Name</label>
+            <input id="category-name" type="text">
+            <label for="category-limit">Budget Amount</label>
+            <input id="category-limit" type="number">
+            <button id="add-new">Add</button>
+        </div>
+    </div>
+    </div>
+
+
+    <script type="module" src="budget.ts"></script>
+  </body>
+</html>

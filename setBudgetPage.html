@@ -1,0 +1,81 @@
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="setBudgetStyle.css" />
+    <title>Budget</title>
+  </head>
+
+  <body>
+    <div>
+        <header>
+            <nav>
+                <a class="brand" href="mainPage.html">
+                    Budgeting
+                </a>
+                <span class="app-title">
+                    <span>Budgeting</span>
+                    <span>Split</span>
+                </span>
+                <details class="account">
+                    <summary>Account</summary>
+                    <div class="account-panel">
+                        guest account
+                    </div>
+                </details>
+            </nav>
+        </header>
+    </div>
+
+    <div class="set-budget-page">
+        <div class="set-pie-chart">
+            <div class="set-title">
+                <h1></h1>
+            </div>
+            <div id="pie-chart-container"></div>
+
+            <div class="date-range">
+                <label for="start">Start date:</label>
+                <input
+                    type="date"
+                    id="start"
+                    name="budget-start"
+                    min="2018-01-01" />
+                <label for="end">End date:</label>
+                <input
+                    type="date"
+                    id="end"
+                    name="budget-start"
+                    min="2018-01-01" />
+            </div>
+            <button id="enter-dates">Enter</button>
+        </div>
+
+        <div class="set-budget">
+            <div class="set-title">
+                <h2>Budget</h2>
+            </div>
+            <div class="set-budget-list">
+                <div id="set-balance">
+                    balance
+                </div>
+                <button id="edit-set-category">Edit</button>
+                <div class="set-expense" id="set-expense-list">
+                </div>
+                <div class="set-budget-buttons">
+                    <button id="set-add">+ add category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="save">
+        <button id="save-budget">save</button>
+    </div>
+
+
+    <script type="module" src="budget.ts"></script>
+  </body>
+</html>
