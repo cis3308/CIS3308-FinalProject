@@ -68,6 +68,36 @@ export const showMonthlyExpenses = async(start_date: string, end_date: string) =
   return data;
 };
 
+//This method performs the division as well. Use to find pie slice size.
+export const  showPieSlicePercentage = async(start_date: string, end_date: string, categoryID: number) =>{
+  const{data: total, error: error1} = await supabase.rpc('showtotalexpensesbycategory', {startdate: start_date, enddate: end_date, categorytype: categoryID});
+  if(total == null){throw(error1)};
+  const{data: balanceData, error: error2} = await supabase.from('balance').select('annual_budget').single();
+  if(balanceData?.annual_budget == null){throw(error2)};
+  const categoryPercentage = total /  (balanceData.annual_budget / 12);
+  return categoryPercentage;
+};
+
+export const  showTotalExpensesByCategory = async(start_date: string, end_date: string, categoryID: number) =>{
+  const{data: total} = await supabase.rpc('showtotalexpensesbycategory', {startdate: start_date, enddate: end_date, categorytype: categoryID});
+  return total;
+};
+
+//this function returns the id as well as the category. The user should only see the category column in the drop down. When a row gets selected, the 
+// corresponding c_id should be the parameter used for filtering in functions like showCategoryTransactions
+export  const showCategories = async() =>{
+  const{data} = await supabase.from('categories')
+  .select('category, c_id');
+  return data;
+};
+
+export  const showCategoryTransactions = async(category: number) =>{
+  const{data} = await supabase.from('transactions')
+  .select('*').order('T_Date', { ascending: false }).eq('c_id', category);
+  return data;
+};
+
+
 export const showMonthlyTotal = async(start_date: string, end_date: string) =>{
   const{data} = await supabase.rpc('showmonthlytotal', {startdate: start_date, enddate: end_date})
   return data;
@@ -95,6 +125,8 @@ export  const showReceiver = async(t_id: number) =>{
   return data;
 };
 
+
+// total category amount
 
 //-----------------------------------------------------//
 

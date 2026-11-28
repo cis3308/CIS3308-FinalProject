@@ -238,6 +238,10 @@ export type Database = {
       }
       showreceiver: { Args: { transactionid: number }; Returns: string }
       showtotaldebt: { Args: never; Returns: number }
+      showtotalexpensesbycategory: {
+        Args: { categorytype: number; enddate: string; startdate: string }
+        Returns: number
+      }
       sumeventexpenses: { Args: { eventid: number }; Returns: number }
       updatebalance: {
         Args: { updateamount: number; userid: string }
