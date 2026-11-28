@@ -137,6 +137,7 @@ export  const updatePayment = async(payment: number, transactionID: number, tran
   await supabase.rpc('updatebalance', {updateamount: payment, userid: transactionOwner});
 };
 
+// you need to account for the exchange rate (*1.5) before insertion 
 export const updateBalance = async(amount: number, userID: string) =>{
   await supabase.rpc('updatebalance', {updateamount: amount, userid: userID}); 
 };

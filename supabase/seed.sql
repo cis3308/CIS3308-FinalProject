@@ -38,6 +38,8 @@ values(1, 'coconut', 1, -7.00, 'usd', 3, '2023-06-23', 'expense'),
 (3, 'XBox', 3, -400.00, 'usd', 2, '2026-08-23', 'expense'),
 (4, 'rent', 4, -1200.00, 'usd', null, '2026-08-23', 'expense'),
 (5, 'anti_depressant', 5, -7000.00, 'jpy', null, '2026-08-23', 'expense'),
-(6, 'train_to_Kyoto', 2, -10000.00, 'jpy',3, '2026-08-23', 'expense');
+(6, 'train_to_Kyoto', 2, -10000.00, 'jpy',3, '2026-08-23', 'expense'),
+(7, 'licorice_pizza', 1, -1500.00, 'jpy',null, '2026-08-13', 'expense'),
+(8, 'flight_to_Taiwan', 2, -90000.00, 'jpy',3, '2026-08-29', 'expense');
 
 
