@@ -16,6 +16,12 @@ export  const showTransactions = async() =>{
   return data;
 };
 
+export  const showExpenses = async() =>{
+  const{data} = await supabase.from('transactions')
+  .select('*').order('T_Date', { ascending: false }).eq('t_type', 'expense');
+  return data;
+};
+
 // only selects amount. This function may be necessary for updating
 //the total balance by using the output as an input param for
 //updateBalance rpc
@@ -45,8 +51,8 @@ export  const showFriendsList = async() =>{
 };
 
 export const showFriendID = async(friendFName: string, friendLName: string) =>{
-  const{data} = await supabase.from("userprofile").select("u_id").eq("first_name", friendFName)
-  .eq("last_name", friendLName);
+  const{data} = await supabase.from('userprofile').select('u_id').eq('first_name', friendFName)
+  .eq('last_name', friendLName);
   return data;
 }
 
@@ -63,7 +69,7 @@ export const showTotalEventExpenses = async(event: number) =>{
 
 export const showMonthlyExpenses = async(start_date: string, end_date: string) =>{
   const{data} = await supabase.from('transactions')
-  .select('*').lte("t_date", end_date).gte("t_date", start_date)
+  .select('*').lte('t_date', end_date).gte('t_date', start_date)
   //.is('f_id', null)
   return data;
 };
@@ -105,7 +111,7 @@ export const showMonthlyTotal = async(start_date: string, end_date: string) =>{
 
 export const filterByEvent = async(e_id: number) =>{
   const{data} = await supabase.from('transactions')
-  .select('*').eq("e_id", e_id);
+  .select('*').eq('e_id', e_id);
   return data;
 };
 
@@ -185,7 +191,7 @@ export const createBalance = async(UserID: string,
 };
 
 export const addFriend = async(userID: string, friendID: string) =>{
-  await supabase.from("friends_list").insert({u_id: userID, f_id: friendID});
+  await supabase.from('friends_list').insert({u_id: userID, f_id: friendID});
 }
 
 //TODO create function to add expose logged user's first and last name 
