@@ -1,4 +1,7 @@
 import data from "../transactions.json";
+import { renderIncomePage } from "./income";
+import { renderExpensePage} from "./expense";
+import {supabase} from './supabaseClient'
 
 export type Transaction = {
     t_date: string;
@@ -85,8 +88,28 @@ export function renderMainPage(): void {
     budget_link.className = "budget-link";
     budget_link.textContent = "Budget";
     budget_link.href = "BudgetPage.html";
-
-    budgetLinks.append(income_link, expense_link, budget_link);
+    let budget_btn=document.createElement('button')
+    budget_btn.textContent='budget'
+    let income_btn=document.createElement('button')
+    income_btn.textContent='income'
+    let expense_btn=document.createElement('button')
+    expense_btn.textContent='expense'
+    let logout_btn=document.createElement('button')
+    logout_btn.textContent='logout'
+    logout_btn.onclick=async()=>{const{error:_error}=await supabase.auth.signOut()}
+    budget_btn.onclick=()=>{
+        document.replaceChildren()
+        window.location.href='./budget/'
+    }
+    income_btn.onclick=()=>{
+        document.replaceChildren()
+        renderIncomePage()
+    }
+    expense_btn.onclick=()=>{
+        document.replaceChildren()
+        renderExpensePage()
+    }
+    budgetLinks.append(income_btn, expense_btn, budget_btn,logout_btn);
     overview.append(monthlyBudget, budgetLinks);
 
     // Recent Transactions

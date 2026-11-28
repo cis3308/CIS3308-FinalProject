@@ -1,7 +1,5 @@
 import { renderLoginPage } from "./login";
 import { renderMainPage} from "./mainpage";
-import { renderIncomePage } from "./income";
-import { renderExpensePage} from "./expense";
 import { createClient, type SupabaseClient, type JwtPayload} from '@supabase/supabase-js'
 import type {Database} from '../types/database.types.ts'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -27,32 +25,17 @@ export const handle_auth_state=(authstate:AuthState)=>{
 }
 
 export async function login(client:SupabaseClient<Database>){
-	const {data:_data,error}=await client.auth.signInWithOAuth({provider:'github',options:{redirectTo:'https://billie-mp4.github.io/authtest/'}})
+	const {data:_data,error}=await client.auth.signInWithOAuth({provider:'github',options:{redirectTo:'https://cis3308.github.io/CIS3308-FinalProject/'}})
 	if(error!==null)return console.error(error)
 }
 export const show_logged_in=(authstate:LoggedIn)=>{
+	document.replaceChildren()
 	renderMainPage()
-	let budget_btn=document.createElement('button')
-	budget_btn.textContent='budget'
-	let income_btn=document.createElement('button')
-	income_btn.textContent='income'
-	let expense_btn=document.createElement('button')
-	expense_btn.textContent='expense'
-	let logout_btn=document.createElement('button')
-	logout_btn.textContent='logout'
-	document.querySelector<HTMLDivElement>('nav.budget-links')?.append(logout_btn)
-	logout_btn.onclick=async()=>{const{error:_error}=await supabase.auth.signOut()}
-	budget_btn.onclick=()=>window.location.href='./holly/'
-	income_btn.onclick=()=>renderIncomePage()
-	expense_btn.onclick=()=>renderExpensePage()
 	console.log(authstate)
 }
 export const show_logged_out=(authstate:LoggedOut)=>{
+	document.replaceChildren()
 	renderLoginPage()
-	let btn=document.createElement('button')
-	btn.textContent='login'
-	document.querySelector<HTMLDivElement>('.main')?.appendChild(btn)
-	btn.onclick=async()=>{login(supabase)}
 	console.log(authstate)
 }
 export const show_auth_state=(authstate:AuthState)=>{
