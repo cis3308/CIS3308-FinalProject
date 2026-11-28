@@ -152,4 +152,11 @@ https://github.com/supabase/supabase-js/issues/2140
     T_ID = selected;
 
 
-   
+//TODO: Event based pie slice: within a month sum transaction amount based on category and return that amount. that amount is divided by the allocated monthly budget.
+monthly budget is static it is 1/12 of annual budget.
+drop down for category: write show categories.
+Write seed with transactions.
+userProfile. Input string.
+store reamining monthly
+
+
