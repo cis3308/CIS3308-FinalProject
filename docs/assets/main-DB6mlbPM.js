@@ -1,0 +1,1 @@
+import{r as e,t}from"./supabaseClient-mJ8uqkb-.js";/* empty css              */function n(){let n=document.createElement(`main`);n.className=`login-page`;let r=document.createElement(`button`);r.type=`button`,r.textContent=`Login`,r.addEventListener(`click`,()=>t(e)),n.append(r),document.body.append(n)}n();

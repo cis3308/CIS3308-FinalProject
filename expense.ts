@@ -1,4 +1,5 @@
 import data from "./transactions.json";
+import {logout} from './src/supabaseClient'
 
 type Expense = {
     id?: string | number;
@@ -68,9 +69,11 @@ function renderExpensePage(): void {
     const accountPanel = document.createElement("div");
     accountPanel.className = "account-panel";
     accountPanel.textContent = "Guest account";
-
-    accountMenu.append(accountLabel, accountPanel);
-    navbar.append(homeLink, appTitle, accountMenu);
+    const logout_btn=document.createElement('button')
+    logout_btn.textContent='logout'
+    logout_btn.onclick=logout
+    accountMenu.append(accountLabel, accountPanel,logout_btn);
+    navbar.append(homeLink, appTitle, accountMenu,logout_btn);
     header.append(navbar);
 
     // Month

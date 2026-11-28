@@ -21,17 +21,20 @@ export const get_auth_state=async (client:SupabaseClient<Database>):Promise<Auth
 export const handle_auth_state=(authstate:AuthState)=>{
 	show_auth_state(authstate)
 }
-
+export async function logout(){
+	const {error}=await supabase.auth.signOut()
+	if(error!==null)console.log(error)
+	window.location.replace('/CIS3308-FinalProject/index.html')
+}
 export async function login(client:SupabaseClient<Database>){
 	const {data:_data,error}=await client.auth.signInWithOAuth({provider:'github',options:{redirectTo:'https://cis3308.github.io/CIS3308-FinalProject/mainpage.html'}})
 	if(error!==null)return console.error(error)
 }
 export const show_logged_in=(authstate:LoggedIn)=>{
-	console.log(authstate)
+	console.log(authstate.kind)
 }
 export const show_logged_out=(authstate:LoggedOut)=>{
-	window.location.href='index.html'
-	console.log(authstate)
+	console.log(authstate.kind)
 }
 export const show_auth_state=(authstate:AuthState)=>{
 	if(authstate.kind==='logged-in')show_logged_in(authstate)

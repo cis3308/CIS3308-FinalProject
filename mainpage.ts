@@ -1,5 +1,5 @@
 import data from "./transactions.json";
-import {supabase} from './src/supabaseClient'
+import {logout} from './src/supabaseClient'
 type Transaction = {
     t_date: string;
     t_type: string;
@@ -45,9 +45,11 @@ function renderMainPage(): void {
     const accountPanel = document.createElement("div");
     accountPanel.className = "account-panel";
     accountPanel.textContent = "Guest account";
-
-    accountMenu.append(accountLabel, accountPanel);
-    navbar.append(homeLink, appTitle, accountMenu);
+    const logout_btn=document.createElement('button')
+    logout_btn.textContent='logout'
+    logout_btn.onclick=logout
+    accountMenu.append(accountLabel, accountPanel,logout_btn);
+    navbar.append(homeLink, appTitle, accountMenu,logout_btn);
     header.append(navbar);
 
     // Monthly Budget
@@ -86,10 +88,7 @@ function renderMainPage(): void {
     budget_link.textContent = "Budget";
     budget_link.href = "holly/BudgetPage.html";
 
-    const logout_btn=document.createElement('button')
-    logout_btn.textContent='logout'
-    logout_btn.onclick=async()=>{await supabase.auth.signOut()}
-    budgetLinks.append(income_link, expense_link, budget_link,logout_btn);
+    budgetLinks.append(income_link, expense_link, budget_link);
     overview.append(monthlyBudget, budgetLinks);
 
     // Recent Transactions

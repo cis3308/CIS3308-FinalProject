@@ -1,4 +1,9 @@
-
+import {logout} from '../src/supabaseClient'
+const nav=document.querySelector<HTMLDivElement>('nav')
+const logout_btn=document.createElement('button')
+logout_btn.textContent='logout'
+logout_btn.onclick=logout
+nav?.appendChild(logout_btn)
 
 console.log("pageFunction.ts is running");
 
