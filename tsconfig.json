@@ -20,5 +20,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src","types","budget","setBudget"]
+  "include": ["src","types","holly"]
 }

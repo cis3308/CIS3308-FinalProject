@@ -6,8 +6,8 @@ export default defineConfig({
     rolldownOptions:{
       input:{
         main:resolve(import.meta.dirname,'index.html'),
-        budget:resolve(import.meta.dirname,'budget/index.html'),
-        setBudget:resolve(import.meta.dirname,'setBudget/index.html')
+        budget:resolve(import.meta.dirname,'budget/BudgetPage.html'),
+        setBudget:resolve(import.meta.dirname,'setBudget/setBudgetPage.html')
       }}},
   base:'/CIS3308-FinalProject/'
 })
