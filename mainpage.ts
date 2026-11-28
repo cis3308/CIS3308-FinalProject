@@ -1,5 +1,5 @@
 import data from "./transactions.json";
-
+import {supabase} from './src/supabaseClient'
 type Transaction = {
     t_date: string;
     t_type: string;
@@ -84,9 +84,12 @@ function renderMainPage(): void {
     const budget_link = document.createElement("a");
     budget_link.className = "budget-link";
     budget_link.textContent = "Budget";
-    budget_link.href = "BudgetPage.html";
+    budget_link.href = "holly/BudgetPage.html";
 
-    budgetLinks.append(income_link, expense_link, budget_link);
+    const logout_btn=document.createElement('button')
+    logout_btn.textContent='logout'
+    logout_btn.onclick=async()=>{await supabase.auth.signOut()}
+    budgetLinks.append(income_link, expense_link, budget_link,logout_btn);
     overview.append(monthlyBudget, budgetLinks);
 
     // Recent Transactions

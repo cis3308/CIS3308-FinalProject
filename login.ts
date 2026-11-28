@@ -1,3 +1,4 @@
+import {login,supabase} from './src/supabaseClient'
 function renderLoginPage(): void {
     const main = document.createElement("main");
     main.className = "login-page";
@@ -10,12 +11,7 @@ function renderLoginPage(): void {
     mainPageButton.type = "button";
     mainPageButton.textContent = "Go to the main page";
 
-    loginButton.addEventListener("click", () => {
-        // call backend
-        loginButton.textContent = "Logged in";
-        loginButton.classList.add("logged-in");
-        loginButton.disabled = true;
-    });
+    loginButton.addEventListener("click",()=>login(supabase));
 
     mainPageButton.addEventListener("click", () => {
         window.location.href = "mainpage.html";
