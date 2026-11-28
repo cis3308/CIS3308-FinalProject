@@ -47,7 +47,7 @@ editButton?.addEventListener("click", () => {
         editButton.textContent = "Save";
         doneEditing = true;
 
-    } 
+    }
     else {
 
         const inputs = document.querySelectorAll<HTMLInputElement>(
@@ -70,23 +70,23 @@ editButton?.addEventListener("click", () => {
 });
 
 saveBudgetButton?.addEventListener("click", () => {
-    
+
 });
 
 dropdownMonthStart?.addEventListener('change', (event: Event) => {
-
+    console.log(event)
 });
 
 dropdownMonthFinish?.addEventListener('change', (event: Event) => {
-
+    console.log(event)
 });
 
 addBudgetCategory?.addEventListener("click", () => {
-    
+
 });
 
 addBudgetIncome?.addEventListener("click", () => {
-    
+
 });
 
 saveBudgetCategoryAmount?.addEventListener("click", () => {
