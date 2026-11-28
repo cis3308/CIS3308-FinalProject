@@ -28,6 +28,14 @@ as $$
     -- changed from text to date
 $$;
 
+create or replace function showTotalExpensesByCategory(startDate text, endDate text, categoryType numeric)
+returns numeric
+language sql
+as $$
+    select sum(amount) from transactions
+    where T_Date >= startDate::date and T_Date <= endDate::date and C_ID = categoryType;
+$$;
+
 create or replace function showLender(transactionID numeric)
 returns text
 language sql
@@ -69,3 +77,20 @@ as $$
     set amount = amount + updateAmount
     where t_ID = t_id;
 $$;
+
+--insert 
+
+-- inserts a row into public.profiles
+-- https://supabase.com/docs/guides/auth/managing-user-data
+-- create function userProfileAdd()
+-- returns trigger
+-- language plpgsql
+-- security definer set search_path = ''
+-- as $$
+-- begin
+--   insert into userProfile
+--   (U_ID, first_name, last_name)
+--   values (new.id, new.raw_user_meta_data ->> 'first_name', new.raw_user_meta_data ->> 'last_name');
+--   return new;
+-- end;
+-- $$;
